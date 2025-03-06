@@ -9,7 +9,10 @@ class TfApp(App):
 		sources = ['N1904', 'KJTR', 'SBL', 'SR', 'TCGNT', 'TISCH']
 		all_results = []  # List to accumulate all unique tuples
 		seen = set()  # Set tracking duplicate results across sources
-
+		
+		# Preset list of node types that are used to determine uniqeness
+		node_types = {'word'}
+		
 		for source in sources:
 			# Replace every occurrence of "sentence" with "sentence_{source}"
 			query2 = query.replace("sentence", f"sentence_{source}")
@@ -23,7 +26,8 @@ class TfApp(App):
 				for node in results[0]:
 					# Calling the v() method on the OtypeFeature instance
 					nodetype=app.api.F.otype.v(node)
-					print (nodetype)
+					#if nodetype in node_types:
+					print (nodetype,node)
 					
 			print(source,len(results))
 			
