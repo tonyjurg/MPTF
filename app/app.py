@@ -36,4 +36,3 @@ class TfApp(App):
 	def __init__(app, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		app.dm('method `run_queries` made available')
-
