@@ -14,7 +14,7 @@ class TfApp(App):
 			updated_query = query.replace("sentence", f"sentence_{source}")
 			# Run the query (assumes that search returns a list of tuples)
 			results = search(app, updated_query)
-			
+			print (source,results)
 			# Filter out duplicates from the results
 			unique_results = []
 			for result in results:
