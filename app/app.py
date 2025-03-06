@@ -15,7 +15,7 @@ class TfApp(App):
 			updated_query = query2.replace("sub", f"sub_{source}")
 			# Run the query (assumes that search returns a list of tuples)
 			results = search(app, updated_query)
-			print (source,results)
+			print (source,len(results))
 			# Filter out duplicates from the results
 			unique_results = []
 			for result in results:
