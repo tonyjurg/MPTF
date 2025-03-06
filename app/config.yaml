@@ -19,9 +19,18 @@ typeDisplay:
   book:
     label: '{book}'
     style: ""
+  chapter:
+    label: '{chapter}'
+    style: ""
+    condense: true
+  verse:
+    label: '{book} {chapter}:{verse}'
+    style: ""
+    excludedFeatures: chapter verse
+    condense: true
   word:
-    featuresBare:
-      - text
+    base: true
+    featuresBare: text
 interfaceDefaults:
   fmt: layout-orig-full
   # used by tf browser
