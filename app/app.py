@@ -1,7 +1,6 @@
 from tf.advanced.app import App
 from tf.advanced.display import displaySetup, displayReset
 from tf.advanced.search import search
-from tf.core.otypefeature import OtypeFeature
 
 class TfApp(App):
 
@@ -43,6 +42,12 @@ class TfApp(App):
 			all_results.extend(unique_results)
 			
 		return all_results
+		
+	def show_results(app,results):
+		sources = ['N1904', 'KJTR', 'SBL', 'SR', 'TCGNT', 'TISCH']
+		app.api.show(results)
+		return
+			
 
 	def __init__(app, *args, **kwargs):
 		super().__init__(*args, **kwargs)
