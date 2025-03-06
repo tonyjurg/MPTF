@@ -26,7 +26,8 @@ class TfApp(App):
 				for node in results[0]:
 					# Calling the v() method on the OtypeFeature instance
 					nodetype=app.api.F.otype.v(node)
-					#if nodetype in node_types:
+					if nodetype in node_types:
+						print ('word!')
 					print (nodetype,node)
 					
 			print(source,len(results))
