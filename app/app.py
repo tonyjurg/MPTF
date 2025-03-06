@@ -1,6 +1,8 @@
 from tf.advanced.app import App
 from tf.advanced.display import displaySetup, displayReset
 from tf.advanced.search import search
+from tf.core.otypefeature import OtypeFeature
+
 
 class TfApp(App):
 
@@ -15,6 +17,10 @@ class TfApp(App):
 			updated_query = query2.replace("sub", f"sub_{source}")
 			# Run the query (assumes that search returns a list of tuples)
 			results = search(app, updated_query)
+			# analyze the nodetypes
+			if len(results)!=0:
+				for node in results[0]:
+					print (v(app,node))
 			print(source,len(results))
 			# Filter out duplicates from the results
 			unique_results = []
