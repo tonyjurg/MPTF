@@ -12,7 +12,7 @@
 @description=Book (in this dataset only the Gospel of John
 @valueType=str
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-05T16:57:04Z
+@dateWritten=2025-03-06T12:48:15Z
 
 John
 John

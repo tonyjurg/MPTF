@@ -12,7 +12,7 @@
 @description=Monad, the sequence number of the word in the corpus (i.e. the Gospel of John)
 @valueType=int
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-05T16:57:04Z
+@dateWritten=2025-03-06T12:48:15Z
 
 1
 2

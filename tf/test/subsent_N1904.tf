@@ -12,7 +12,7 @@
 @description=Subsentence number (counted over the N1904 base text with standard punctuation)
 @valueType=int
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-05T16:57:04Z
+@dateWritten=2025-03-06T12:48:15Z
 
 22145	1
 2
