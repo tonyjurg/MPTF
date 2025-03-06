@@ -43,9 +43,9 @@ class TfApp(App):
 			
 		return all_results
 		
-	def show_results(app,results):
+	def show_results(app,results, **options):
 		sources = ['N1904', 'KJTR', 'SBL', 'SR', 'TCGNT', 'TISCH']
-		app.api.show(results)
+		app.api.MPTF.show(results, **options)
 		return
 			
 
