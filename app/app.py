@@ -1,8 +1,7 @@
 from tf.advanced.app import App
 from tf.advanced.display import displaySetup, displayReset
 from tf.advanced.search import search
-from tf.core.otypefeature import v
-
+from tf.core.otypefeature import OtypeFeature
 
 class TfApp(App):
 
@@ -20,7 +19,9 @@ class TfApp(App):
 			# analyze the nodetypes
 			if len(results)!=0:
 				for node in results[0]:
-					print (v(app,node))
+					# Calling the v() method on the OtypeFeature instance
+					nodetype=app.api.otype.v(node)
+					print (nodetype)
 			print(source,len(results))
 			# Filter out duplicates from the results
 			unique_results = []
