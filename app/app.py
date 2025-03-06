@@ -7,22 +7,26 @@ class TfApp(App):
 
 	def run_queries(app,query):
 		sources = ['N1904', 'KJTR', 'SBL', 'SR', 'TCGNT', 'TISCH']
-		all_results = {}
-		seen = set()  # To track duplicate results across sources
+		all_results = []  # List to accumulate all unique tuples
+		seen = set()  # Set tracking duplicate results across sources
 
 		for source in sources:
 			# Replace every occurrence of "sentence" with "sentence_{source}"
 			query2 = query.replace("sentence", f"sentence_{source}")
 			updated_query = query2.replace("sub", f"sub_{source}")
+			
 			# Run the query (assumes that search returns a list of tuples)
 			results = search(app, updated_query)
-			# analyze the nodetypes
+			
+			# analyze the nodetypes based upon the first result returned
 			if len(results)!=0:
 				for node in results[0]:
 					# Calling the v() method on the OtypeFeature instance
-					nodetype=app.api.otype.v(node)
+					nodetype=app.api.F.otype.v(node)
 					print (nodetype)
+					
 			print(source,len(results))
+			
 			# Filter out duplicates from the results
 			unique_results = []
 			for result in results:
@@ -30,9 +34,12 @@ class TfApp(App):
 					seen.add(result)
 					unique_results.append(result)
 					
-			all_results.append(unique_results)
+			# extend the list 
+			all_results.extend(unique_results)
+			
 		return all_results
 
 	def __init__(app, *args, **kwargs):
 		super().__init__(*args, **kwargs)
 		app.dm('method `run_queries` made available')
+
