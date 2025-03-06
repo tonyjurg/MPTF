@@ -11,7 +11,8 @@ class TfApp(App):
 
 		for source in sources:
 			# Replace every occurrence of "sentence" with "sentence_{source}"
-			updated_query = query.replace("sentence", f"sentence_{source}")
+			query2 = query.replace("sentence", f"sentence_{source}")
+			updated_query = query2.replace("sub", f"sub_{source}")
 			# Run the query (assumes that search returns a list of tuples)
 			results = search(app, updated_query)
 			print (source,results)
