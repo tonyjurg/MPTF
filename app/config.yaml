@@ -1,0 +1,34 @@
+# Here is the information for creating a config.yaml: https://annotation.github.io/text-fabric/tf/advanced/settings.html
+# Here is a good example: https://github.com/annotation/app-bhsa/blob/master/code/config.yaml
+# check whether a list with (- - - ) works or whether I need to do a list with commas "a, b, c"
+apiVersion: 3
+dataDisplay:
+  noneValues: 
+  - none
+  - unknown
+  - null
+  - NA
+  - ''
+# excludedFeatures:
+# sectionSep1: #this is to display sections well in table
+# sectionSep2: #this is to display sections well in table
+# showVerseInTuple: 
+# textFormats:
+# docs: reference to transcription.md
+typeDisplay:
+  book:
+    label: '{book}'
+    style: ""
+  word:
+    featuresBare:
+      - text
+interfaceDefaults:
+  fmt: layout-orig-full
+  # used by tf browser
+provenanceSpec:
+  corpus: "Nestle 1904 (multi punctuated Gospel of John)"
+  version: "test"
+  org: "tonyjurg"
+  repro: "MP-FT"
+  webUrl: "https://bibleol.3bmoodle.dk/text/show_text/nestle1904/<1>/<2>/<3>"
+
