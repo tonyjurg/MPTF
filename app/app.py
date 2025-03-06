@@ -1,7 +1,7 @@
 from tf.advanced.app import App
 from tf.advanced.display import displaySetup, displayReset
 from tf.advanced.search import search
-from tf.core.otypefeature import OtypeFeature
+from tf.core.otypefeature import v
 
 
 class TfApp(App):
