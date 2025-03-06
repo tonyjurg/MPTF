@@ -23,7 +23,7 @@ class TfApp(App):
 					unique_results.append(result)
 					
 			all_results[source] = unique_results
-			return all_results
+		return all_results
 
 	def __init__(app, *args, **kwargs):
 		super().__init__(*args, **kwargs)
