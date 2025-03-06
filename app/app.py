@@ -21,15 +21,13 @@ class TfApp(App):
 			results = search(app, updated_query)
 			
 			# analyze the nodetypes based upon the first result returned
-			if len(results)!=0:
-				for node in results[0]:
+			#if len(results)!=0:
+				#for node in results[0]:
 					# Calling the v() method on the OtypeFeature instance
-					nodetype=app.api.F.otype.v(node)
-					if nodetype in node_types:
-						print ('word!')
-					print (nodetype,node)
-					
-			print(source,len(results))
+					#nodetype=app.api.F.otype.v(node)
+					#if nodetype in node_types:
+					#	print ('word!')
+			print(f' on {source}',end="")
 			
 			# Filter out duplicates from the results
 			unique_results = []
@@ -45,7 +43,7 @@ class TfApp(App):
 		
 	def show_results(app,results, **options):
 		sources = ['N1904', 'KJTR', 'SBL', 'SR', 'TCGNT', 'TISCH']
-		app.api.MPTF.show(results, **options)
+		app.show(results, **options)
 		return
 			
 
