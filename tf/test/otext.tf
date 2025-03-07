@@ -10,6 +10,12 @@
 @TextFabric version=test
 @Version=1904
 @fmt:text-orig-full={text}{after_N1904}
+@fmt:text-SR={text}{after_SR}
+@fmt:text-N1904={text}{after_N1904}
+@fmt:text-SBL={text}{after_SBL}
+@fmt:text-TCGNT={text}{after_TCGNT}
+@fmt:text-TISCH={text}{after_TISCH}
+@fmt:text-KJTR={text}{after_KJTR}
 @sectionFeatures=book,chapter,verse
 @sectionTypes=book,chapter,verse
 @structureFeatures=book,chapter,verse
