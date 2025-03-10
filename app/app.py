@@ -1,5 +1,6 @@
 from tf.advanced.app import App
 from tf.advanced.display import displaySetup, displayReset
+import re
 
 class TfApp(App):
 
@@ -11,13 +12,16 @@ class TfApp(App):
 		self.show = types.MethodType(custom_show, self)
 		self.dm('Custom versions for `search` and `show` are loaded')
 
+	def transform_m(self, origValue):
+		newValue = origValue+"22"
+		return "bla"
 
 # Define the custom search function (this should be outside the class!)
 def custom_search(self, query,**options):
-	print(f'custom_search with {options}')
+	#print(f'custom_search with {options}')
 	called_options=options
-	options["silent"]=True
-	print (f'changed options to {options}')
+	#options["silent"]=True
+	#print (f'changed options to {options}')
 	sources = ['N1904', 'KJTR', 'SBL', 'SR', 'TCGNT', 'TISCH']
 	all_results = []  # List to accumulate all unique tuples
 	seen = set()  # Set tracking duplicate results across sources
@@ -27,12 +31,24 @@ def custom_search(self, query,**options):
 	from tf.advanced.search import search as orig_search
 
 	for source in sources:
-		# Replace every occurrence of "sentence" with "sentence_{source}"
-		query2 = query.replace("sentence", f"sentence_{source}")
-		updated_query = query2.replace("sub", f"sub_{source}")
+		# analysis of template based on https://annotation.github.io/text-fabric/tf/about/searchusage.html 
+		changed_query=""
+		for index, line in enumerate(query.splitlines()):
+			if line.startswith('%'):
+				print(f'line {index}= comment: "{line}"')
+				changed_query += line + '\n'
+			else:
+				print(f'line {index}= atom: "{line}"')
+				# Replace every occurrence of "sentence" with "sentence_{source}"
+				query2 = line.replace("sentence", f"sentence_{source}")
+				updated_query = query2.replace("sub", f"sub_{source}")
+				changed_query += updated_query + '\n'
+		print(f'updated query: {changed_query}')
 		# Run the query (assumes that search returns a list of tuples)
-		results = orig_search(self, updated_query,**options)
-		print (f'{len(results)} results for {updated_query}\n')
+		# supress standard responces
+		options['silent']='deep'
+		results = orig_search(self, changed_query,**options)
+		print (f'{len(results)} results for {source}')
 		# Filter out duplicates from the results
 		unique_results = []
 		for result in results:
@@ -47,13 +63,14 @@ def custom_search(self, query,**options):
 
 # Define the custom show function (this should be outside the class!)
 def custom_show(self, results, **options):
-	#print(f'custom_show with {options} and data {results}')
+	print(f'custom_show with {options} and data {results}')
 	called_options=options
 	start = options.get("start", 1)  # Default value is 1
 	end = options.get("end", len(results))  # Default value is the length of results
 	options['start']=1 # now put everything to 1 as the start and end position will be dealt with in the loop
 	options['end']=1
-	#print (f'now the options are {options}')
+	options['_asString']=True
+	print (f'now the options are {options}')
 	# sort the list of tuples according to the last element in each tuple
 	sorted_results = sorted(results, key=lambda x: x[-1])
 	counter=0
@@ -74,10 +91,22 @@ def custom_show(self, results, **options):
 				suppress_list.remove(nodetype)
 				suffix=nodetype.split('_')[1]
 				break
+		extraFeatureList=f'sentence_{suffix}:sentence_{suffix}'
 		# Each key-value pair in dictionary OptionDict represents a specific setting or option for this results view.
-		OptionDict = {'hiddenTypes' : suppress_list, 'fmt' : f'text-{suffix}', 'condensed': {True}, 'queryFeatures': {False}, 'suppress' : {''}}
+		OptionDict = {'hiddenTypes' : suppress_list, 'fmt' : f'text-{suffix}', 'condensed': {True}, 'queryFeatures': {False}, 'extraFeatures': extraFeatureList, 'suppress' : {''}}
 		# Pass the dictionary (with a variable number of pairs) to the displaySetup function to unpack and apply.
 		displaySetup(self,**OptionDict)
-		orig_show(self, single_result, **options)
+		HTMLobject=orig_show(self, single_result, **options)
+		pattern = r'(<span class="f">)sentence_[^=]+(=</span>)'
+		# The pattern breaks down as follows:
+		# (<span class="f">)  -> Captures the starting tag.
+		# sentence_         -> Matches the literal text "sentence_".
+		# [^=]+             -> Matches one or more characters that are not '='.
+		# (=</span>)        -> Captures the equals sign and closing tag.
+		# Replace with the captured starting tag, the literal "sentence", then the captured equals sign and closing tag.
+		replacement = r'\1sentence\2'
+		new_HTMLobject = re.sub(pattern, replacement, HTMLobject)
+		#print (type(new_HTMLobject))
+		self.dh(new_HTMLobject)
 
 

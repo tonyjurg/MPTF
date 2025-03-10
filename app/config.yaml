@@ -31,6 +31,8 @@ typeDisplay:
   word:
     base: true
     featuresBare: text
+    #transform:
+    #   monad: m
 interfaceDefaults:
   fmt: layout-orig-full
   # used by tf browser
@@ -38,6 +40,6 @@ provenanceSpec:
   corpus: "Nestle 1904 (multi punctuated Gospel of John)"
   version: "test"
   org: "tonyjurg"
-  repro: "MP-FT"
+  repro: "MPFT"
   webUrl: "https://bibleol.3bmoodle.dk/text/show_text/nestle1904/<1>/<2>/<3>"
 
