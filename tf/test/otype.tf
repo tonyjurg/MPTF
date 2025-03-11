@@ -11,21 +11,21 @@
 @Version=1904
 @valueType=str
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-06T12:48:15Z
+@dateWritten=2025-03-11T21:00:02Z
 
 1-15643	word
 15644	book
 15645-15665	chapter
-15666-16442	sentence_KJTR
-16443-17173	sentence_N1904
-17174-17866	sentence_SBL
-17867-18447	sentence_SR
-18448-19229	sentence_TCGNT
-19230-19954	sentence_TISCH
-19955-22144	sub_KJTR
-22145-23555	sub_N1904
-23556-25216	sub_SBL
-25217-27460	sub_SR
-27461-29670	sub_TCGNT
-29671-31471	sub_TISCH
-31472-32350	verse
+15666-18631	sentence_KJTR
+18632-20772	sentence_N1904
+20773-23125	sentence_SBL
+23126-25949	sentence_SR
+25950-28940	sentence_TCGNT
+28941-31465	sentence_TISCH
+31466-34431	subsentence_KJTR
+34432-36572	subsentence_N1904
+36573-38925	subsentence_SBL
+38926-41749	subsentence_SR
+41750-44740	subsentence_TCGNT
+44741-47265	subsentence_TISCH
+47266-48144	verse

@@ -12,7 +12,7 @@
 @description=Book (in this dataset only the Gospel of John
 @valueType=str
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-06T12:48:15Z
+@dateWritten=2025-03-11T21:00:02Z
 
 John
 John
@@ -15679,7 +15679,7 @@ John
 John
 John
 John
-31472	John
+47266	John
 John
 John
 John

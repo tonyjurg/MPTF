@@ -39,10 +39,8 @@ def custom_search(self, query,**options):
 				changed_query += line + '\n'
 			else:
 				print(f'line {index}= atom: "{line}"')
-				# Replace every occurrence of "sentence" with "sentence_{source}"
-				query2 = line.replace("sentence", f"sentence_{source}")
-				updated_query = query2.replace("sub", f"sub_{source}")
-				changed_query += updated_query + '\n'
+				# Replace every occurrence of "[sub]sentence" with "[sub]sentence_{source}"
+				changed_query += line.replace("sentence", f"sentence_{source}") + '\n'
 		print(f'updated query: {changed_query}')
 		# Run the query (assumes that search returns a list of tuples)
 		# supress standard responces
@@ -73,40 +71,47 @@ def custom_show(self, results, **options):
 	print (f'now the options are {options}')
 	# sort the list of tuples according to the last element in each tuple
 	sorted_results = sorted(results, key=lambda x: x[-1])
+	result_length=len(sorted_results)
 	counter=0
 	sources = ['N1904', 'KJTR', 'SBL', 'SR', 'TCGNT', 'TISCH']
 	from tf.advanced.display import show as orig_show
 	for index in range(start, end):
 		counter+=1
-		single_result = [sorted_results[index]]
-		#print(f"Processing result {counter} of {end-start} out of total {len(results)}  The data is {single_result} of type {type(single_result)}")
-		self.dm(f'## Result {index}')
-		# determine which source version is found in the current tuple
-		suppress_list= ['sub_N1904','sub_SBL','sub_TISCH','sub_KJTR','sub_TCGNT','sub_SR']
-		for node in single_result[0]:
-			# Calling the v() method on the OtypeFeature instance
-			nodetype = self.api.F.otype.v(node)
-			# If the nodetype is in the suppression list, remove it and define text-format
-			if nodetype in suppress_list:
-				suppress_list.remove(nodetype)
-				suffix=nodetype.split('_')[1]
-				break
-		extraFeatureList=f'sentence_{suffix}:sentence_{suffix}'
-		# Each key-value pair in dictionary OptionDict represents a specific setting or option for this results view.
-		OptionDict = {'hiddenTypes' : suppress_list, 'fmt' : f'text-{suffix}', 'condensed': {True}, 'queryFeatures': {False}, 'extraFeatures': extraFeatureList, 'suppress' : {''}}
-		# Pass the dictionary (with a variable number of pairs) to the displaySetup function to unpack and apply.
-		displaySetup(self,**OptionDict)
-		HTMLobject=orig_show(self, single_result, **options)
-		pattern = r'(<span class="f">)sentence_[^=]+(=</span>)'
-		# The pattern breaks down as follows:
-		# (<span class="f">)  -> Captures the starting tag.
-		# sentence_         -> Matches the literal text "sentence_".
-		# [^=]+             -> Matches one or more characters that are not '='.
-		# (=</span>)        -> Captures the equals sign and closing tag.
-		# Replace with the captured starting tag, the literal "sentence", then the captured equals sign and closing tag.
-		replacement = r'\1sentence\2'
-		new_HTMLobject = re.sub(pattern, replacement, HTMLobject)
-		#print (type(new_HTMLobject))
-		self.dh(new_HTMLobject)
+		print (counter)
+		if (counter <= result_length) and (index<=result_length):
+			single_result = [sorted_results[index]]
+			#print(f"Processing result {counter} of {end-start} out of total {len(results)}  The data is {single_result} of type {type(single_result)}")
+			self.dm(f'## Result {index}')
+			# determine which source version is found in the current tuple
+			suppress_list= ['sentence_N1904','sentence_SBL','sentence_TISCH','sentence_KJTR','sentence_TCGNT','sentence_SR','subsentence_N1904','subsentence_SBL','subsentence_TISCH','subsentence_KJTR','subsentence_TCGNT','subsentence_SR']
+			extraFeatureList=''
+			fmtType='text-orig-full'
+			for node in single_result[0]:
+				# Calling the v() method on the OtypeFeature instance
+				nodetype = self.api.F.otype.v(node)
+				# If the nodetype is in the suppression list, remove it and define text-format
+				if nodetype in suppress_list:
+					suppress_list.remove(nodetype)
+					suffix=nodetype.split('_')[1]
+					extraFeatureList=f'sentence_{suffix}:sentence_{suffix}'
+					fmtType=f'text-{suffix}'
+					#break
+			# Each key-value pair in dictionary OptionDict represents a specific setting or option for this results view.
+			OptionDict = {'hiddenTypes' : suppress_list, 'fmt' : fmtType , 'condensed': {True}, 'queryFeatures': {False}, 'extraFeatures': extraFeatureList, 'suppress' : {''}}
+			# Pass the dictionary (with a variable number of pairs) to the displaySetup function to unpack and apply.
+			displaySetup(self,**OptionDict)
+			HTMLobject=orig_show(self, single_result, **options)
+			####pattern = r'(<span class="f">)sentence_[^=]+(=</span>)'
+			# The pattern breaks down as follows:
+			# (<span class="f">)  -> Captures the starting tag.
+			# sentence_         -> Matches the literal text "sentence_".
+			# [^=]+             -> Matches one or more characters that are not '='.
+			# (=</span>)        -> Captures the equals sign and closing tag.
+			# Replace with the captured starting tag, the literal "sentence", then the captured equals sign and closing tag.
+			####replacement = r'\1sentence\2'
+			####new_HTMLobject = re.sub(pattern, replacement, HTMLobject)
+			#print (type(new_HTMLobject))
+			####self.dh(new_HTMLobject)
+			self.dh(HTMLobject)
 
 

@@ -12,7 +12,7 @@
 @description=Characters following the word (N1904 base text with TCGNT punctuation)
 @valueType=str
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-06T12:48:15Z
+@dateWritten=2025-03-11T21:00:02Z
 
 
 

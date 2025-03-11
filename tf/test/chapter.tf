@@ -12,7 +12,7 @@
 @description=Chapter number inside the Gospel of John
 @valueType=int
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-06T12:48:15Z
+@dateWritten=2025-03-11T21:00:02Z
 
 1
 1
@@ -15678,7 +15678,7 @@
 19
 20
 21
-31472	1
+47266	1
 1
 1
 1

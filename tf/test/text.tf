@@ -12,7 +12,7 @@
 @description=Word as it appears in the N1904 base text (excl. punctuations)
 @valueType=str
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-06T12:48:15Z
+@dateWritten=2025-03-11T21:00:02Z
 
 εν
 αρχη

@@ -9,17 +9,17 @@
 @Name=Greek New Testament multi punctuated (N1904 base text)
 @TextFabric version=test
 @Version=1904
-@fmt:text-orig-full={text}{after_N1904}
-@fmt:text-SR={text}{after_SR}
+@fmt:text-KJTR={text}{after_KJTR}
 @fmt:text-N1904={text}{after_N1904}
 @fmt:text-SBL={text}{after_SBL}
+@fmt:text-SR={text}{after_SR}
 @fmt:text-TCGNT={text}{after_TCGNT}
 @fmt:text-TISCH={text}{after_TISCH}
-@fmt:text-KJTR={text}{after_KJTR}
+@fmt:text-orig-full={text}{after_N1904}
 @sectionFeatures=book,chapter,verse
 @sectionTypes=book,chapter,verse
 @structureFeatures=book,chapter,verse
 @structureTypes=book,chapter,verse
 @writtenBy=Text-Fabric
-@dateWritten=2025-03-06T12:48:15Z
+@dateWritten=2025-03-11T21:00:02Z
 
