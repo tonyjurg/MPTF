@@ -1,0 +1,8 @@
+https://annotation.github.io/text-fabric/tf/about/apps.html#other-modules
+
+
+Do not import app-dependent modules
+
+If you import these other modules by means of the Python import system using import module or from module import name then everything works fine until you load two apps in the same program, that in turn load their other modules. As long as different apps load modules with different names, there is no problem. But if two apps both have a module with the same name, then the first of them will be loaded, and both apps use the same code.
+
+In order to prevent this, you can use the function loadModule() to dynamically load these modules. They will be given an app-dependent internal name, so the Python importer will not conflate them.
